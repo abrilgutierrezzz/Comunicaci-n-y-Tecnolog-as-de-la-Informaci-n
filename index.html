@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portafolio Digital - Psicología 2025B</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #1a202c;
+            background: #f7fafc;
+        }
+
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 4rem 1rem;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .subtitle {
+            font-size: 1.1rem;
+            opacity: 0.95;
+        }
+
+        nav {
+            background: white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        nav ul li a {
+            display: block;
+            padding: 1rem 2rem;
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            border-bottom: 3px solid transparent;
+        }
+
+        nav ul li a:hover,
+        nav ul li a.active {
+            background: #f7fafc;
+            border-bottom-color: #667eea;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+
+        section {
+            display: none;
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        section.active {
+            display: block;
+        }
+
+        h2 {
+            color: #667eea;
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 3px solid #667eea;
+        }
+
+        .datos-box {
+            background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%);
+            padding: 2rem;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+        }
+
+        .datos-box h3 {
+            color: #667eea;
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .datos-box p {
+            margin-bottom: 0.8rem;
+            font-size: 1rem;
+        }
+
+        .datos-box strong {
+            color: #764ba2;
+            display: inline-block;
+            min-width: 110px;
+        }
+
+        .presentacion {
+            background: #f7fafc;
+            padding: 2rem;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+        }
+
+        .presentacion h3 {
+            color: #667eea;
+            margin-bottom: 1rem;
+        }
+
+        .actividad-card {
+            background: white;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+            overflow: hidden;
+            transition: all 0.3s;
+        }
+
+        .actividad-card:hover {
+            border-color: #667eea;
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.15);
+        }
+
+        .actividad-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1.5rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            user-select: none;
+        }
+
+        .actividad-header h3 {
+            margin: 0;
+            font-size: 1.2rem;
+        }
+
+        .actividad-icon {
+            font-size: 1.2rem;
+            transition: transform 0.3s;
+        }
+
+        .actividad-card.expanded .actividad-icon {
+            transform: rotate(180deg);
+        }
+
+        .actividad-body {
+            padding: 1.5rem;
+        }
+
+        .actividad-desc {
+            color: #4a5568;
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+
+        .actividad-details {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease;
+        }
+
+        .actividad-card.expanded .actividad-details {
+            max-height: 1500px;
+        }
+
+        .image-placeholder {
+            width: 100%;
+            height: 250px;
+            background: linear-gradient(135deg, #667eea10 0%, #764ba210 100%);
+            border: 2px dashed #cbd5e0;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #718096;
+            font-size: 1rem;
+            margin: 1rem 0;
+        }
+
+        .reflexion-section {
+            background: #f7fafc;
+            padding: 1.5rem;
+            border-radius: 8px;
+            border-left: 4px solid #764ba2;
+            margin-top: 1rem;
+        }
+
+        .reflexion-section h4 {
+            color: #764ba2;
+            margin-bottom: 0.8rem;
+        }
+
+        .reflexion-section p {
+            color: #4a5568;
+            font-style: italic;
+            line-height: 1.7;
+        }
+
+        footer {
+            background: #2d3748;
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 3rem;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            nav ul {
+                flex-direction: column;
+            }
+
+            nav ul li a {
+                padding: 1rem;
+                text-align: center;
+            }
+
+            section {
+                padding: 1.5rem;
+            }
+
+            .actividad-header {
+                padding: 1rem;
+            }
+
+            .actividad-header h3 {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Portafolio Digital – Psicología 2025B</h1>
+        <p class="subtitle">Registro de Aprendizaje y Desarrollo Profesional</p>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="#" class="nav-link active" data-section="inicio">Inicio</a></li>
+            <li><a href="#" class="nav-link" data-section="actividades">Actividades del Semestre</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <section id="inicio" class="active">
+            <h2>Bienvenida a mi Portafolio</h2>
+            
+            <div class="datos-box">
+                <h3>📋 Datos Personales</h3>
+                <p><strong>Nombre:</strong> Abril Gutiérrez Torres</p>
+                <p><strong>Código:</strong> 222421794</p>
+                <p><strong>Carrera:</strong> Licenciatura en Psicología</p>
+                <p><strong>Semestre:</strong> 2025B</p>
+                <p><strong>Correo:</strong> abril.gutierrez2179@alumnos.udg.mx</p>
+                <p><strong>Universidad:</strong> CUALTOS - Universidad de Guadalajara</p>
+            </div>
+
+            <div class="presentacion">
+                <h3>💫 Sobre Mí</h3>
+                <p>Soy estudiante de psicología apasionada por comprender el comportamiento humano y los procesos mentales que influyen en nuestras decisiones y relaciones. Mi interés principal se centra en la psicología clínica y el desarrollo de estrategias terapéuticas innovadoras. A través de este portafolio, documento mi trayectoria académica y las competencias que he desarrollado durante el semestre 2025B. Mi objetivo es contribuir al bienestar emocional de las personas mediante una práctica profesional ética, fundamentada en la investigación científica y el compromiso social.</p>
+            </div>
+        </section>
+
+        <section id="actividades">
+            <h2>📚 Actividades del Semestre</h2>
+            
+            <div class="actividad-card">
+                <div class="actividad-header" onclick="toggleCard(this)">
+                    <h3>Infografía de la comunicación y tu carrera</h3>
+                    <span class="actividad-icon">▼</span>
+                </div>
+                <div class="actividad-body">
+                    <p class="actividad-desc">Realizar una infografía de la comunicación y tu carrera, respondiendo la siguiente pregunta ¿Cuál es la importancia de la comunicación en tu carrera?</p>
+                    <div class="actividad-details">
+                        <div class="image-placeholder">
+                            📸 Agrega aquí la imagen de tu infografía
+                        </div>
+                        <div class="reflexion-section">
+                            <h4>💭 Reflexión de Aprendizaje</h4>
+                            <p>[Escribe aquí tu reflexión sobre lo aprendido en esta actividad]</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="actividad-card">
+                <div class="actividad-header" onclick="toggleCard(this)">
+                    <h3>Componentes de un equipo de cómputo (diagnóstico)</h3>
+                    <span class="actividad-icon">▼</span>
+                </div>
+                <div class="actividad-body">
+                    <p class="actividad-desc">Como primera actividad, contestar un cuestionario diagnóstico sobre los componentes de un equipo de cómputo.</p>
+                    <div class="actividad-details">
+                        <div class="image-placeholder">
+                            📸 Agrega aquí la captura del cuestionario
+                        </div>
+                        <div class="reflexion-section">
+                            <h4>💭 Reflexión de Aprendizaje</h4>
+                            <p>[Escribe aquí tu reflexión sobre lo aprendido en esta actividad]</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="actividad-card">
+                <div class="actividad-header" onclick="toggleCard(this)">
+                    <h3>Componentes de un equipo de cómputo</h3>
+                    <span class="actividad-icon">▼</span>
+                </div>
+                <div class="actividad-body">
+                    <p class="actividad-desc">De acuerdo a las instrucciones proporcionadas en clase, desarrollar la actividad sobre componentes de hardware y software.</p>
+                    <div class="actividad-details">
+                        <div class="image-placeholder">
+                            📸 Agrega aquí la imagen de tu actividad
+                        </div>
+                        <div class="reflexion-section">
+                            <h4>💭 Reflexión de Aprendizaje</h4>
+                            <p>[Escribe aquí tu reflexión sobre lo aprendido en esta actividad]</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="actividad-card">
+                <div class="actividad-header" onclick="toggleCard(this)">
+                    <h3>Actividad de clase 14 de octubre</h3>
+                    <span class="actividad-icon">▼</span>
+                </div>
+                <div class="actividad-body">
+                    <p class="actividad-desc">Realizar la actividad de acuerdo a las instrucciones detalladas en el documento anexo.</p>
+                    <div class="actividad-details">
+                        <div class="image-placeholder">
+                            📸 Agrega aquí la imagen de tu actividad
+                        </div>
+                        <div class="reflexion-section">
+                            <h4>💭 Reflexión de Aprendizaje</h4>
+                            <p>[Escribe aquí tu reflexión sobre lo aprendido en esta actividad]</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="actividad-card">
+                <div class="actividad-header" onclick="toggleCard(this)">
+                    <h3>Actividad 21 de octubre</h3>
+                    <span class="actividad-icon">▼</span>
+                </div>
+                <div class="actividad-body">
+                    <p class="actividad-desc">Realizar la práctica de acuerdo a las instrucciones descritas en el documento anexo.</p>
+                    <div class="actividad-details">
+                        <div class="image-placeholder">
+                            📸 Agrega aquí la imagen de tu práctica
+                        </div>
+                        <div class="reflexion-section">
+                            <h4>💭 Reflexión de Aprendizaje</h4>
+                            <p>[Escribe aquí tu reflexión sobre lo aprendido en esta actividad]</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="actividad-card">
+                <div class="actividad-header" onclick="toggleCard(this)">
+                    <h3>Evidencia cuestionario</h3>
+                    <span class="actividad-icon">▼</span>
+                </div>
+                <div class="actividad-body">
+                    <p class="actividad-desc">Subir la captura de pantalla del cuestionario realizado.</p>
+                    <div class="actividad-details">
+                        <div class="image-placeholder">
+                            📸 Agrega aquí la captura del cuestionario
+                        </div>
+                        <div class="reflexion-section">
+                            <h4>💭 Reflexión de Aprendizaje</h4>
+                            <p>[Escribe aquí tu reflexión sobre lo aprendido en esta actividad]</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="actividad-card">
+                <div class="actividad-header" onclick="toggleCard(this)">
+                    <h3>Práctica 1.2 Combinación de correspondencia</h3>
+                    <span class="actividad-icon">▼</span>
+                </div>
+                <div class="actividad-body">
+                    <p class="actividad-desc">Práctica de combinación de correspondencia en Word, aplicando herramientas de automatización de documentos.</p>
+                    <div class="actividad-details">
+                        <div class="image-placeholder">
+                            📸 Agrega aquí la imagen de tu práctica
+                        </div>
+                        <div class="reflexion-section">
+                            <h4>💭 Reflexión de Aprendizaje</h4>
+                            <p>[Escribe aquí tu reflexión sobre lo aprendido en esta actividad]</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="actividad-card">
+                <div class="actividad-header" onclick="toggleCard(this)">
+                    <h3>Práctica 2.1 Fundamentos de Excel</h3>
+                    <span class="actividad-icon">▼</span>
+                </div>
+                <div class="actividad-body">
+                    <p class="actividad-desc">Práctica sobre fundamentos de Excel, aprendiendo las herramientas básicas de hojas de cálculo.</p>
+                    <div class="actividad-details">
+                        <div class="image-placeholder">
+                            📸 Agrega aquí la imagen de tu práctica
+                        </div>
+                        <div class="reflexion-section">
+                            <h4>💭 Reflexión de Aprendizaje</h4>
+                            <p>[Escribe aquí tu reflexión sobre lo aprendido en esta actividad]</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="actividad-card">
+                <div class="actividad-header" onclick="toggleCard(this)">
+                    <h3>Práctica 2.2 Funciones en Excel</h3>
+                    <span class="actividad-icon">▼</span>
+                </div>
+                <div class="actividad-body">
+                    <p class="actividad-desc">Realizar la práctica de acuerdo a las instrucciones detalladas sobre funciones y fórmulas en Excel.</p>
+                    <div class="actividad-details">
+                        <div class="image-placeholder">
+                            📸 Agrega aquí la imagen de tu práctica
+                        </div>
+                        <div class="reflexion-section">
+                            <h4>💭 Reflexión de Aprendizaje</h4>
+                            <p>[Escribe aquí tu reflexión sobre lo aprendido en esta actividad]</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="actividad-card">
+                <div class="actividad-header" onclick="toggleCard(this)">
+                    <h3>3.1 Formularios de Google</h3>
+                    <span class="actividad-icon">▼</span>
+                </div>
+                <div class="actividad-body">
+                    <p class="actividad-desc">Realizar la actividad siguiendo las instrucciones detalladas sobre creación de formularios digitales.</p>
+                    <div class="actividad-details">
+                        <div class="image-placeholder">
+                            📸 Agrega aquí la imagen de tu formulario
+                        </div>
+                        <div class="reflexion-section">
+                            <h4>💭 Reflexión de Aprendizaje</h4>
+                            <p>[Escribe aquí tu reflexión sobre lo aprendido en esta actividad]</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="actividad-card">
+                <div class="actividad-header" onclick="toggleCard(this)">
+                    <h3>4.1 Organizadores gráficos</h3>
+                    <span class="actividad-icon">▼</span>
+                </div>
+                <div class="actividad-body">
+                    <p class="actividad-desc">Crear organizadores gráficos utilizando diferentes herramientas digitales (MindMeister, Lucidchart, Genially u otras).</p>
+                    <div class="actividad-details">
+                        <div class="image-placeholder">
+                            📸 Agrega aquí la imagen de tus organizadores
+                        </div>
+                        <div class="reflexion-section">
+                            <h4>💭 Reflexión de Aprendizaje</h4>
+                            <p>[Escribe aquí tu reflexión sobre lo aprendido en esta actividad]</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 Portafolio Digital - Abril Gutiérrez Torres. Todos los derechos reservados.</p>
+    </footer>
+
+    <script>
+        // Navegación entre secciones
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetSection = this.dataset.section;
+                
+                // Actualizar enlaces activos
+                document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+                this.classList.add('active');
+                
+                // Mostrar sección correspondiente
+                document.querySelectorAll('section').forEach(s => s.classList.remove('active'));
+                document.getElementById(targetSection).classList.add('active');
+                
+                // Scroll al inicio
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+        });
+
+        // Toggle de tarjetas de actividades
+        function toggleCard(header) {
+            const card = header.closest('.actividad-card');
+            const wasExpanded = card.classList.contains('expanded');
+            
+            // Cerrar todas las tarjetas
+            document.querySelectorAll('.actividad-card').forEach(c => {
+                c.classList.remove('expanded');
+            });
+            
+            // Expandir la tarjeta clickeada si no estaba expandida
+            if (!wasExpanded) {
+                card.classList.add('expanded');
+            }
+        }
+    </script>
+</body>
+</html>
